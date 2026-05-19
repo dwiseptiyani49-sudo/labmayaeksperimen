@@ -1,0 +1,1564 @@
+<!doctype html>
+<html lang="id" class="h-full">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Masa Demokrasi Liberal - Sejarah Kelas XII</title>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    .nunito { font-family: 'Nunito', sans-serif; }
+    
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes pulse-glow { 0%,100%{box-shadow:0 0 20px rgba(245,158,11,0.3)} 50%{box-shadow:0 0 40px rgba(245,158,11,0.6)} }
+    @keyframes gradient-shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    @keyframes slide-up { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    
+    .float { animation: float 3s ease-in-out infinite; }
+    .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .gradient-bg { background: linear-gradient(135deg, #1a1a2e, #16213e, #0f3460, #533483); background-size: 400% 400%; animation: gradient-shift 15s ease infinite; }
+    .slide-up { animation: slide-up 0.6s ease forwards; }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    
+    .nav-btn { transition: all 0.2s; }
+    .nav-btn:hover { transform: scale(1.05); }
+    .nav-btn:active { transform: scale(0.95); }
+    
+    .option-btn { transition: all 0.2s; border: 2px solid rgba(255,255,255,0.1); }
+    .option-btn:hover { border-color: rgba(245,158,11,0.5); background: rgba(245,158,11,0.1); }
+    .option-btn.selected { border-color: #f59e0b; background: rgba(245,158,11,0.2); }
+    .option-btn.correct { border-color: #10b981; background: rgba(16,185,129,0.3); }
+    .option-btn.incorrect { border-color: #ef4444; background: rgba(239,68,68,0.2); }
+    
+    .progress-bar { transition: width 0.5s ease; }
+    
+    .particle {
+      position: absolute; border-radius: 50%; pointer-events: none; opacity: 0.3;
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .tab-active { background: linear-gradient(135deg, #f59e0b, #d97706); color: white; }
+    
+    input:focus, textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(245,158,11,0.3); }
+    
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+    ::-webkit-scrollbar-thumb { background: rgba(245,158,11,0.4); border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+ </head>
+ <body class="h-full">
+  <div id="app" class="h-full w-full gradient-bg text-white overflow-auto relative"><!-- Notification Container -->
+   <div id="notif-container" class="fixed top-4 right-4 z-50"></div><!-- Particles -->
+   <div id="particles" class="fixed inset-0 pointer-events-none overflow-hidden"></div><!-- PAGES -->
+   <div id="page-home" class="page min-h-full flex items-center justify-center p-4">
+    <div class="max-w-lg w-full slide-up">
+     <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/30 rounded-full px-4 py-1 text-sm text-amber-300 mb-4"><i data-lucide="book-open" style="width:16px;height:16px"></i> Sejarah Kelas XII • Fase F
+      </div>
+      <h1 id="display-title" class="nunito text-4xl md:text-5xl font-900 bg-gradient-to-r from-amber-300 via-orange-200 to-red-300 bg-clip-text text-transparent mb-3">Masa Demokrasi Liberal (1950-1959)</h1>
+      <p id="display-school" class="text-gray-400 text-sm">SMA Negeri 97 Jakarta</p>
+     </div>
+     <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-5">
+      <div><label class="text-xs text-gray-400 uppercase tracking-wider mb-1 block">Nama Siswa</label> <input id="input-name" type="text" placeholder="Masukkan nama lengkap..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500">
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+       <div><label class="text-xs text-gray-400 uppercase tracking-wider mb-1 block">Kelas</label> <input id="input-class" type="text" placeholder="XII IPS 1" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500">
+       </div>
+       <div><label class="text-xs text-gray-400 uppercase tracking-wider mb-1 block">Tanggal</label> <input id="input-date" type="date" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500">
+       </div>
+      </div><button onclick="startLearning()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 hover:from-amber-400 hover:to-orange-400 rounded-xl py-4 font-bold text-lg nav-btn pulse-glow mt-4"> 🚀 Mulai Pembelajaran </button>
+     </div>
+    </div>
+   </div><!-- MENU PAGE -->
+   <div id="page-menu" class="page min-h-full p-6 hidden">
+    <div class="max-w-4xl mx-auto slide-up">
+     <div class="text-center mb-8">
+      <p class="text-amber-400 text-sm mb-1">Selamat datang, <span id="menu-name" class="font-bold"></span>!</p>
+      <h2 class="nunito text-3xl font-800 text-white">Menu Pembelajaran</h2>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div onclick="goTo('pretest')" class="card-hover cursor-pointer bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        📝
+       </div>
+       <h3 class="font-bold text-lg">Pre-Test</h3>
+       <p class="text-gray-400 text-sm mt-1">Uji pengetahuan awal</p>
+      </div>
+      <div onclick="goTo('materi')" class="card-hover cursor-pointer bg-gradient-to-br from-amber-500/20 to-amber-600/10 border border-amber-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        📚
+       </div>
+       <h3 class="font-bold text-lg">Materi</h3>
+       <p class="text-gray-400 text-sm mt-1">Demokrasi Liberal</p>
+      </div>
+      <div onclick="goTo('simulasi')" class="card-hover cursor-pointer bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        🎭
+       </div>
+       <h3 class="font-bold text-lg">Simulasi</h3>
+       <p class="text-gray-400 text-sm mt-1">Parlementer vs Presiden</p>
+      </div>
+      <div onclick="goTo('posttest')" class="card-hover cursor-pointer bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        🎯
+       </div>
+       <h3 class="font-bold text-lg">Post-Test</h3>
+       <p class="text-gray-400 text-sm mt-1">Uji pemahaman akhir</p>
+      </div>
+      <div onclick="goTo('refleksi')" class="card-hover cursor-pointer bg-gradient-to-br from-pink-500/20 to-pink-600/10 border border-pink-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        💭
+       </div>
+       <h3 class="font-bold text-lg">Refleksi 4P</h3>
+       <p class="text-gray-400 text-sm mt-1">Peristiwa, Perasaan, Pembelajaran, Penerapan</p>
+      </div>
+      <div onclick="goTo('hasil')" class="card-hover cursor-pointer bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        📊
+       </div>
+       <h3 class="font-bold text-lg">Hasil Belajar</h3>
+       <p class="text-gray-400 text-sm mt-1">Lihat skor &amp; progres</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- MATERI PAGE -->
+   <div id="page-materi" class="page min-h-full p-6 hidden">
+    <div class="max-w-4xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button> <!-- Tabs -->
+     <div class="flex flex-wrap gap-2 mb-6"><button onclick="showMateri(0)" id="mtab-0" class="tab-active px-4 py-2 rounded-xl text-sm font-semibold transition-all">Pengertian &amp; Latar Belakang</button> <button onclick="showMateri(1)" id="mtab-1" class="px-4 py-2 rounded-xl text-sm font-semibold bg-white/5 hover:bg-white/10 transition-all">Politik &amp; Partai</button> <button onclick="showMateri(2)" id="mtab-2" class="px-4 py-2 rounded-xl text-sm font-semibold bg-white/5 hover:bg-white/10 transition-all">Peristiwa &amp; Krisis</button> <button onclick="showMateri(3)" id="mtab-3" class="px-4 py-2 rounded-xl text-sm font-semibold bg-white/5 hover:bg-white/10 transition-all">Pencapaian &amp; Warisan</button>
+     </div>
+     <div id="materi-content" class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 md:p-8 leading-relaxed"></div>
+    </div>
+   </div><!-- SIMULASI PAGE -->
+   <div id="page-simulasi" class="page min-h-full p-6 hidden">
+    <div class="max-w-4xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button>
+     <h2 class="nunito text-2xl font-800 mb-4">🎭 Simulasi: Sistem Pemerintahan</h2>
+     <p class="text-gray-400 mb-6 text-sm">Pilih gaya pemerintahan dan lihat dampaknya terhadap stabilitas &amp; kebijakan publik!</p>
+     <div class="grid md:grid-cols-2 gap-6">
+      <div onclick="selectSystem('parlemen')" class="card-hover cursor-pointer">
+       <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-2xl h-64 relative overflow-hidden flex flex-col items-center justify-center p-6 hover:shadow-2xl transition-all">
+        <div class="text-5xl mb-3">
+         🏛️
+        </div>
+        <h3 class="font-bold text-lg text-white text-center">Sistem Parlementer</h3>
+        <p class="text-blue-200 text-xs text-center mt-2">(Seperti Indonesia 1950-1959)</p>
+       </div>
+       <div class="mt-4"><label class="text-sm text-gray-300 block mb-2">Jumlah Partai: <span id="sim-parpol" class="text-amber-400 font-bold">5</span></label> <input id="parpol-slider" type="range" min="2" max="34" value="5" oninput="updateSim2()" class="w-full accent-blue-500">
+       </div>
+      </div>
+      <div onclick="selectSystem('presiden')" class="card-hover cursor-pointer">
+       <div class="bg-gradient-to-br from-red-600 to-red-800 rounded-2xl h-64 relative overflow-hidden flex flex-col items-center justify-center p-6 hover:shadow-2xl transition-all">
+        <div class="text-5xl mb-3">
+         ⚡
+        </div>
+        <h3 class="font-bold text-lg text-white text-center">Sistem Presidensial</h3>
+        <p class="text-red-200 text-xs text-center mt-2">(Sistem Modern)</p>
+       </div>
+       <div class="mt-4"><label class="text-sm text-gray-300 block mb-2">Kekuatan Presiden: <span id="sim-kekuatan" class="text-red-400 font-bold">50%</span></label> <input id="kekuatan-slider" type="range" min="20" max="100" value="50" oninput="updateSim2()" class="w-full accent-red-500">
+       </div>
+      </div>
+     </div>
+     <div id="sim-results" class="bg-white/5 border border-white/10 rounded-2xl p-6 mt-6 text-sm space-y-3">
+      <div>
+       <span class="text-gray-400">Sistem Terpilih:</span> <span id="sys-choice" class="font-bold text-amber-400">Belum dipilih</span>
+      </div>
+      <div>
+       <span class="text-gray-400">Stabilitas Pemerintah:</span> <span id="sys-stability" class="font-bold text-emerald-400">-</span>
+      </div>
+      <div>
+       <span class="text-gray-400">Kecepatan Pengambilan Keputusan:</span> <span id="sys-speed" class="font-bold text-orange-400">-</span>
+      </div>
+      <div>
+       <span class="text-gray-400">Risiko Fragmentasi Parpol:</span> <span id="sys-fragment" class="font-bold text-red-400">-</span>
+      </div>
+      <div id="sys-explanation" class="mt-4 p-3 bg-amber-500/10 border border-amber-500/20 rounded-xl text-xs text-gray-300 leading-relaxed">
+       Pilih salah satu sistem pemerintahan dengan menggeser slider untuk melihat analisisnya!
+      </div>
+     </div>
+    </div>
+   </div><!-- PRE-TEST PAGE -->
+   <div id="page-pretest" class="page min-h-full p-6 hidden">
+    <div class="max-w-3xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button>
+     <div class="text-center mb-6">
+      <h2 class="nunito text-2xl font-800">📝 Pre-Test</h2>
+      <p class="text-gray-400 text-sm">Uji pengetahuan awal kamu tentang Masa Demokrasi Liberal</p>
+     </div>
+     <div id="pretest-container"></div>
+    </div>
+   </div><!-- POST-TEST PAGE -->
+   <div id="page-posttest" class="page min-h-full p-6 hidden">
+    <div class="max-w-3xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button>
+     <div class="text-center mb-6">
+      <h2 class="nunito text-2xl font-800">🎯 Post-Test</h2>
+      <p class="text-gray-400 text-sm">Uji pemahaman setelah mempelajari materi</p>
+     </div>
+     <div id="posttest-container"></div>
+    </div>
+   </div><!-- REFLEKSI PAGE -->
+   <div id="page-refleksi" class="page min-h-full p-6 hidden">
+    <div class="max-w-3xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button>
+     <h2 class="nunito text-2xl font-800 text-center mb-6">💭 Refleksi 4P</h2>
+     <div class="space-y-5">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+       <h3 class="font-bold text-blue-400 mb-2">📌 Peristiwa</h3>
+       <p class="text-gray-400 text-xs mb-2">Apa peristiwa penting yang kamu pelajari hari ini?</p><textarea id="ref-peristiwa" rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 resize-none" placeholder="Tuliskan peristiwa yang berkesan..."></textarea>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+       <h3 class="font-bold text-pink-400 mb-2">❤️ Perasaan</h3>
+       <p class="text-gray-400 text-xs mb-2">Bagaimana perasaanmu tentang periode Demokrasi Liberal?</p><textarea id="ref-perasaan" rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 resize-none" placeholder="Ungkapkan perasaanmu..."></textarea>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+       <h3 class="font-bold text-emerald-400 mb-2">💡 Pembelajaran</h3>
+       <p class="text-gray-400 text-xs mb-2">Apa pembelajaran kunci yang kamu dapatkan?</p><textarea id="ref-pembelajaran" rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 resize-none" placeholder="Tuliskan hal penting yang kamu pelajari..."></textarea>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+       <h3 class="font-bold text-yellow-400 mb-2">🎯 Penerapan</h3>
+       <p class="text-gray-400 text-xs mb-2">Bagaimana kamu akan menerapkan pembelajaran ini dalam kehidupan?</p><textarea id="ref-penerapan" rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 resize-none" placeholder="Rencana penerapanmu..."></textarea>
+      </div><button onclick="saveRefleksi()" class="w-full bg-gradient-to-r from-amber-500 to-orange-500 rounded-xl py-3 font-bold nav-btn">Simpan Refleksi ✨</button>
+      <div id="refleksi-saved" class="hidden text-center text-emerald-400 text-sm py-2">
+       ✅ Refleksi berhasil disimpan ke Canva Sheet!
+      </div>
+     </div>
+    </div>
+   </div><!-- HASIL PAGE -->
+   <div id="page-hasil" class="page min-h-full p-6 hidden">
+    <div class="max-w-3xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button>
+     <h2 class="nunito text-2xl font-800 text-center mb-6">📊 Hasil Belajar</h2>
+     <div id="hasil-content" class="space-y-4"></div>
+    </div>
+   </div>
+  </div>
+  <script>
+// STATE
+let studentName = '', studentClass = '', studentDate = '';
+let pretestScore = null, posttestScore = null;
+let currentPage = 'home';
+let currentRecordId = null;
+let allStudentData = [];
+
+// MATERI DATA
+const materiData = [
+  {
+    title: 'Pengertian & Latar Belakang',
+    content: `
+      <h3 class="text-xl font-bold text-amber-400 mb-4">📖 Masa Demokrasi Liberal (1950-1959)</h3>
+      <p class="mb-4">Demokrasi Liberal adalah periode ketika Indonesia menerapkan sistem demokrasi parlementer dengan kebebasan berpolitik yang luas. Periode ini dimulai setelah diakuinya kedaulatan Indonesia (1949) dan berakhir pada 1959 ketika Presiden Sukarno mendeklarasikan Demokrasi Terpimpin.</p>
+      <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 mb-4">
+        <h4 class="font-bold text-amber-300 mb-2">🔑 Karakteristik Demokrasi Liberal:</h4>
+        <ul class="list-disc list-inside space-y-1 text-sm text-gray-300">
+          <li><strong>Sistem Parlementer</strong> — Parlemen memiliki kekuatan besar</li>
+          <li><strong>Kebebasan Berpolitik</strong> — Banyak partai, pers bebas</li>
+          <li><strong>Kabinet Koalisi</strong> — Pemerintahan bergantung pada suara parlemen</li>
+          <li><strong>Presiden Sebagai Simbol</strong> — Kekuasaan eksekutif terbatas</li>
+          <li><strong>Pemilihan Umum</strong> — 1955 adalah pemilu pertama di Indonesia</li>
+        </ul>
+      </div>
+      <div class="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4">
+        <h4 class="font-bold text-orange-300 mb-2">📅 Konstitusi & Dasar Hukum:</h4>
+        <ul class="text-sm text-gray-300 space-y-1">
+          <li><strong>Konstitusi RIS (1949-1950)</strong> — Konstitusi sementara</li>
+          <li><strong>UUD 1950</strong> — Konstitusi Sementara Republik Indonesia Serikat</li>
+          <li><strong>Pembentukan Konstituante</strong> — Untuk menyusun UUD yang tetap</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    title: 'Kehidupan Politik & Partai',
+    content: `
+      <h3 class="text-xl font-bold text-amber-400 mb-4">🏛️ Landscape Politik Masa Demokrasi Liberal</h3>
+      
+      <div class="space-y-4">
+        <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-red-300 mb-2">🔴 1. Partai Nasional Indonesia (PNI)</h4>
+          <p class="text-sm text-gray-300 mb-2">Partai penerus PNI (1945), menjadi partai besar di era Demokrasi Liberal.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Pemimpin: Ali Sastroamijoyo</li>
+            <li>Fokus: Nasionalisme, sosialisme moderate</li>
+            <li>Basis: Kalangan intelektual, pegawai negeri</li>
+          </ul>
+        </div>
+        
+        <div class="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-orange-300 mb-2">🟠 2. Masyumi (Majlis Syuro Muslimin Indonesia)</h4>
+          <p class="text-sm text-gray-300 mb-2">Partai Islam terbesar, mewakili aspirasi umat muslim di Indonesia.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Pemimpin: Muhammad Natsir, Syafruddin Prawiranegara</li>
+            <li>Fokus: Islam, demokrasi Islam</li>
+            <li>Basis: Santri, kalangan Islam tradisional & modern</li>
+          </ul>
+        </div>
+        
+        <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-yellow-300 mb-2">🟡 3. Partai Komunis Indonesia (PKI)</h4>
+          <p class="text-sm text-gray-300 mb-2">Partai komunis yang berkembang pesat, memenangkan pemilu 1955.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Pemimpin: D.N. Aidit</li>
+            <li>Fokus: Komunisme, revolusi sosial</li>
+            <li>Basis: Petani, buruh, intelektual radikal</li>
+          </ul>
+        </div>
+        
+        <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-blue-300 mb-2">🔵 4. PSI (Partai Sosialis Indonesia)</h4>
+          <p class="text-sm text-gray-300 mb-2">Partai sosialis demokrat yang mewakili golongan intelektual.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Pemimpin: Soemitro</li>
+            <li>Fokus: Sosialisme demokrat</li>
+            <li>Basis: Intelektual, buruh urban</li>
+          </ul>
+        </div>
+      </div>
+    `
+  },
+  {
+    title: 'Peristiwa Penting & Krisis',
+    content: `
+      <h3 class="text-xl font-bold text-amber-400 mb-4">⚡ Peristiwa & Krisis Masa Demokrasi Liberal</h3>
+      
+      <div class="space-y-4">
+        <div class="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-purple-300 mb-2">📍 1. Pemilihan Umum 1955 (Pemilu Pertama)</h4>
+          <p class="text-sm text-gray-300 mb-2">Pemilihan umum pertama di Indonesia yang demokratis dan jujur.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>PNI: 22% suara → 57 kursi</li>
+            <li>Masyumi: 20% suara → 57 kursi</li>
+            <li>NU: 18% suara → 45 kursi</li>
+            <li>PKI: 16% suara → 39 kursi</li>
+            <li>Hasil: Empat besar yang seimbang, sulit membentuk kabinet</li>
+          </ul>
+        </div>
+        
+        <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-red-300 mb-2">🔥 2. Pemberontakan PRRI-Permesta (1956-1958)</h4>
+          <p class="text-sm text-gray-300 mb-2">Gerakan separatis di Sumatera & Sulawesi yang menolak dominasi Jawa.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>PRRI: Pemerintah Revolusioner RI (Sumatera)</li>
+            <li>PERMESTA: Perjuangan Semesta (Sulawesi)</li>
+            <li>Penyebab: Ketimpangan ekonomi, otonomi daerah</li>
+            <li>Hasil: Ditekan oleh TNI, tapi menunjukkan krisis federal</li>
+          </ul>
+        </div>
+        
+        <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-blue-300 mb-2">🎤 3. Konferensi Asia-Afrika 1955 (Bandung)</h4>
+          <p class="text-sm text-gray-300 mb-2">Konferensi internasional penting yang meningkatkan pengaruh Indonesia.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Peserta: Negara-negara Asia & Afrika</li>
+            <li>Hasil: Dasasila Bandung (Panca Azimat)</li>
+            <li>Dampak: Indonesia menjadi pemimpin dunia ketiga</li>
+          </ul>
+        </div>
+        
+        <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-yellow-300 mb-2">📉 4. Ketidakstabilan Kabinet & Ekonomi</h4>
+          <p class="text-sm text-gray-300 mb-2">Parlemen terlalu kuat, kabinet sering jatuh, ekonomi terus merosot.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Berganti-ganti Perdana Menteri 7 kali (1950-1959)</li>
+            <li>Inflasi tinggi, devisa menipis</li>
+            <li>Hutang luar negeri membengkak</li>
+            <li>Gaji pegawai negeri menurun, korupsi meningkat</li>
+          </ul>
+        </div>
+        
+        <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-green-300 mb-2">🔚 5. Dekrit Presiden 5 Juli 1959</h4>
+          <p class="text-sm text-gray-300 mb-2">Sukarno membubarkan parlemen dan mengakhiri Demokrasi Liberal.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Alasan: Parlemen mengabaikan presiden, konstituante deadlock</li>
+            <li>Hasil: Kembali ke UUD 1945 (Demokrasi Terpimpin)</li>
+            <li>Dampak: Penguatan Sukarno & PKI, diminusnya partai lain</li>
+          </ul>
+        </div>
+      </div>
+    `
+  },
+  {
+    title: 'Pencapaian & Warisan',
+    content: `
+      <h3 class="text-xl font-bold text-amber-400 mb-4">🏆 Pencapaian & Warisan Demokrasi Liberal</h3>
+      
+      <div class="space-y-4">
+        <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-green-300 mb-2">✅ Pencapaian Positif</h4>
+          <ul class="text-sm text-gray-300 list-disc list-inside space-y-2">
+            <li><strong>Pemilu 1955</strong> — Pemilihan umum demokratis pertama yang adil & jujur</li>
+            <li><strong>Kebebasan Pers & Organisasi</strong> — Media, partai, & LSM berkembang pesat</li>
+            <li><strong>Diplomasi Internasional</strong> — Konferensi Bandung 1955 meningkatkan posisi Indonesia</li>
+            <li><strong>Konsolidasi Nasional</strong> — NKRI terbentuk, integrasi berbagai daerah & agama</li>
+            <li><strong>Pembangunan Infrastruktur</strong> — Jalan, listrik, sekolah dibangun di berbagai daerah</li>
+            <li><strong>Perolehan Irian Barat</strong> — Melalui negosiasi internasional</li>
+          </ul>
+        </div>
+        
+        <div class="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-orange-300 mb-2">⚠️ Kelemahan & Tantangan</h4>
+          <ul class="text-sm text-gray-300 list-disc list-inside space-y-2">
+            <li><strong>Parpol Terlalu Banyak</strong> — 34 partai di pemilu 1955, fragmentasi kekuatan</li>
+            <li><strong>Parlemen Terlalu Dominan</strong> — Presiden lemah, eksekutif tidak stabil</li>
+            <li><strong>Polarisasi Ideologi</strong> — Islam vs Komunis vs Nasionalis menciptakan tensi</li>
+            <li><strong>Krisis Ekonomi</strong> — Defisit anggaran, inflasi, pengangguran tinggi</li>
+            <li><strong>Ketidakstabilan Daerah</strong> — PRRI-Permesta, DI/TII, gerakan separatis</li>
+            <li><strong>Ketimpangan Sosial</strong> — Korupsi, koneksi bisnis mendominasi ekonomi</li>
+          </ul>
+        </div>
+        
+        <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-blue-300 mb-2">📚 Warisan bagi Demokrasi Indonesia</h4>
+          <ul class="text-sm text-gray-300 list-disc list-inside space-y-2">
+            <li>Pengalaman berharga tentang sistem parlementer & multipartai</li>
+            <li>Pentingnya stabilitas pemerintah & kekuatan eksekutif yang seimbang</li>
+            <li>Pelajaran tentang bahaya fragmentasi parpol & polarisasi ideologi</li>
+            <li>Inspirasi untuk era reformasi & demokrasi modern Indonesia (1998-sekarang)</li>
+            <li>Bukti bahwa demokrasi bisa dilaksanakan di negara berkembang</li>
+          </ul>
+        </div>
+      </div>
+    `
+  }
+];
+
+// SOAL PRE-TEST (C1-C3: Mudah-Sedang)
+const pretestQuestions = [
+  { q: 'Masa Demokrasi Liberal di Indonesia berlangsung pada tahun...', level: 'Mudah (C1)', options: ['1945-1950', '1950-1959', '1959-1966', '1998-2004'], answer: 1 },
+  { q: 'Sistem pemerintahan yang diterapkan pada masa Demokrasi Liberal adalah...', level: 'Mudah (C1)', options: ['Presidensial', 'Parlementer', 'Monarkhi Konstitusional', 'Diktator Militer'], answer: 1 },
+  { q: 'Pemilihan umum pertama di Indonesia dilaksanakan pada tahun...', level: 'Mudah (C1)', options: ['1950', '1955', '1960', '1965'], answer: 1 },
+  { q: 'Partai mana yang memenangkan pemilu 1955 dengan perolehan suara terbanyak?', level: 'Mudah (C1)', options: ['PKI', 'Masyumi', 'PNI dan Masyumi (keseimbangan)', 'PSI'], answer: 2 },
+  { q: 'Apa latar belakang lahirnya Demokrasi Liberal di Indonesia?', level: 'Sedang (C2)', options: ['Dipengaruhi oleh sistem Uni Soviet', 'Diakuinya kedaulatan Indonesia dan adopsi Konstitusi RIS', 'Keputusan Sukarno untuk memperlemah parlemen', 'Tekanan dari Barat'], answer: 1 },
+  { q: 'Peristiwa PRRI-Permesta menunjukkan...', level: 'Sedang (C2)', options: ['Keberhasilan demokrasi di daerah', 'Ketidakpuasan daerah terhadap dominasi Jawa dan ketimpangan ekonomi', 'Dukungan rakyat terhadap pemerintah pusat', 'Kesuksesan sistem parlementer'], answer: 1 },
+  { q: 'Konferensi Asia-Afrika 1955 di Bandung menghasilkan...', level: 'Sedang (C3)', options: ['Perjanjian perdagangan internasional', 'Dasasila Bandung yang menjadi prinsip negara-negara non-blok', 'Pembentukan Perserikatan Bangsa-Bangsa', 'Deklarasi perang terhadap komunisme'], answer: 1 },
+  { q: 'Berapa kali pergantian Perdana Menteri terjadi selama masa Demokrasi Liberal?', level: 'Sedang (C3)', options: ['3 kali', '5 kali', '7 kali', '10 kali'], answer: 2 },
+  { q: 'Apa masalah utama yang menyebabkan ketidakstabilan pemerintahan pada masa Demokrasi Liberal?', level: 'Sedang (C2)', options: ['Kurangnya dana dari rakyat', 'Parlemen memiliki kekuatan terlalu besar, kabinet bergantung pada koalisi yang rapuh', 'Sistem keamanan yang lemah', 'Tidak ada sistem peradilan yang jelas'], answer: 1 },
+  { q: 'Dekrit Presiden 5 Juli 1959 mengakhiri Demokrasi Liberal karena...', level: 'Sedang (C3)', options: ['Rakyat meminta langsung', 'Parlemen mengabaikan presiden & konstituante deadlock, Sukarno mengembalikan UUD 1945', 'Serangan militer dari luar negeri', 'Krisis ekonomi yang tidak dapat diatasi'], answer: 1 }
+];
+
+// SOAL POST-TEST (C3-C6: Sedang-Sulit)
+const posttestQuestions = [
+  { q: 'Analisis dampak positif Pemilu 1955 bagi konsolidasi demokrasi Indonesia!', level: 'Sedang (C3)', options: ['Tidak memberikan dampak apa pun', 'Membuktikan Indonesia mampu melaksanakan pemilu demokratis yang adil & jujur, memperkuat legitimasi pemerintah', 'Hanya menguntungkan partai tertentu', 'Menyebabkan chaos dan kerusuhan'], answer: 1 },
+  { q: 'Mengapa Konferensi Asia-Afrika 1955 dianggap pencapaian penting bagi diplomasi Indonesia?', level: 'Sulit (C4)', options: ['Karena menghasilkan perjanjian perdagangan yang menguntungkan', 'Karena Indonesia menjadi pemimpin gerakan non-blok & memperkuat posisi internasional di tengah Perang Dingin', 'Karena mendeklarasikan perang kepada negara lain', 'Karena mendapatkan bantuan finansial besar'], answer: 1 },
+  { q: 'Bandingkan kelemahan sistem parlementer pada masa Demokrasi Liberal dengan kekuatan sistem presidensial!', level: 'Sulit (C4)', options: ['Parlementer lebih kuat karena presiden dominan', 'Parlementer lemah (kabinet jatuh sering), presidensial kuat (eksekutif stabil, presiden punya wewenang jelas)', 'Keduanya sistem yang sama', 'Tidak ada perbedaan yang signifikan'], answer: 1 },
+  { q: 'Jika fragmentasi parpol pada pemilu 1955 tidak terjadi, apa konsekuensi bagi stabilitas pemerintah?', level: 'Sulit (C5)', options: ['Pemerintah tetap tidak stabil', 'Pemerintah akan lebih stabil, koalisi tunggal bisa terbentuk, keputusan lebih cepat', 'Akan terjadi diktatorship', 'Ekonomi akan lebih memburuk'], answer: 1 },
+  { q: 'Evaluasi: Apakah PRRI-Permesta merupakan bukti kegagalan demokrasi atau tantangan konsolidasi nasional?', level: 'Sulit (C5)', options: ['Bukti kegagalan total demokrasi', 'Tantangan konsolidasi: ketimpangan ekonomi & otonomi daerah menunjukkan demokrasi masih perlu penyesuaian, bukan kegagalan', 'Tidak ada dampak pada demokrasi', 'Kesalahan pihak militer semata'], answer: 1 },
+  { q: 'Rekonstruksi: Apa yang bisa dilakukan pemerintah untuk mencegah runtuhnya Demokrasi Liberal?', level: 'Sangat Sulit (C6)', options: ['Tidak ada cara untuk mencegahnya', 'Memperkuat koalisi multi-parpol yang stabil, mengatasi krisis ekonomi, memberikan otonomi daerah, mengurangi polarisasi ideologi', 'Hanya dengan pembatasan kebebasan pers', 'Mengandalkan dukungan militer penuh'], answer: 1 },
+  { q: 'Mengapa polarisasi ideologi antara Islam-Komunis-Nasionalis menjadi ancaman pada masa Demokrasi Liberal?', level: 'Sedang (C3)', options: ['Karena ketiga ideologi sama-sama lemah', 'Karena masing-masing blok ingin dominasi, menciptakan deadlock di parlemen, menghambat pembentukan kebijakan', 'Karena tidak ada undang-undang', 'Karena rakyat tidak tertarik pada ideologi'], answer: 1 },
+  { q: 'Kritik: Mengapa Dekrit Presiden 5 Juli 1959 dianggap sebagai akhir dari Demokrasi Liberal?', level: 'Sulit (C4)', options: ['Karena hanya simbolis saja', 'Karena Sukarno membubarkan parlemen, kembali ke UUD 1945, mengkonsentrasikan kekuasaan di tangan presiden, menandai berakhirnya sistem parlementer', 'Karena tidak ada pengaruh nyata', 'Karena rakyat menginginkan perubahan'], answer: 1 },
+  { q: 'Bagaimana ketimpangan ekonomi regional (Jawa vs Sumatera-Sulawesi) memicu PRRI-Permesta?', level: 'Sulit (C4)', options: ['Tidak ada hubungan antara ekonomi dan pemberontakan', 'Sumatera-Sulawesi merasa dimarginalisasi ekonomi, hasil bumi diambil pusat tanpa kompensasi adil, otonomi daerah diabaikan → pemberontakan', 'Hanya masalah budaya semata', 'Hasil dari propaganda komunis'], answer: 1 },
+  { q: 'Bagaimana warisan Demokrasi Liberal mempengaruhi perkembangan demokrasi Indonesia pasca-1998?', level: 'Sangat Sulit (C6)', options: ['Tidak ada warisan yang berarti', 'Memberikan pelajaran: pentingnya stabilitas eksekutif, bahaya fragmentasi parpol, desentralisasi yang lebih serius untuk integrasi nasional, inspirasi sistem presidensial & federalisme terbatas', 'Hanya membawa dampak negatif', 'Reformasi 1998 lepas dari sejarah Demokrasi Liberal'], answer: 1 }
+];
+
+// QUIZ ENGINE
+function renderQuiz(containerId, questions, type) {
+  const container = document.getElementById(containerId);
+  let html = '';
+  html += `<div class="mb-4 flex items-center justify-between"><span class="text-xs text-gray-400">${questions.length} soal</span><div class="flex gap-1">`;
+  questions.forEach((_, i) => { html += `<div class="w-3 h-3 rounded-full bg-white/10" id="${type}-dot-${i}"></div>`; });
+  html += '</div></div>';
+  
+  questions.forEach((q, i) => {
+    html += `<div id="${type}-q-${i}" class="${i > 0 ? 'hidden' : ''} bg-white/5 border border-white/10 rounded-2xl p-6 mb-4">
+      <div class="flex items-center gap-2 mb-1"><span class="text-xs px-2 py-0.5 rounded-full ${q.level.includes('Mudah') ? 'bg-green-500/20 text-green-400' : q.level.includes('Sedang') ? 'bg-yellow-500/20 text-yellow-400' : 'bg-red-500/20 text-red-400'}">${q.level}</span><span class="text-xs text-gray-500">Soal ${i+1}/${questions.length}</span></div>
+      <p class="font-semibold mb-4 text-sm">${q.q}</p>
+      <div class="space-y-2">`;
+    q.options.forEach((opt, j) => {
+      html += `<button onclick="selectAnswer('${type}',${i},${j})" id="${type}-${i}-${j}" class="option-btn w-full text-left px-4 py-3 rounded-xl text-sm">${String.fromCharCode(65+j)}. ${opt}</button>`;
+    });
+    html += `</div><div id="${type}-feedback-${i}" class="mt-3 text-sm hidden"></div>
+      <div class="flex justify-between mt-4">
+        <button onclick="navQuiz('${type}',${i},-1)" class="nav-btn px-4 py-2 rounded-lg bg-white/5 text-sm ${i===0?'invisible':''}">← Sebelumnya</button>
+        <button onclick="navQuiz('${type}',${i},1)" id="${type}-next-${i}" class="nav-btn px-4 py-2 rounded-lg bg-amber-500/20 text-amber-400 text-sm hidden">${i===questions.length-1?'Lihat Hasil →':'Selanjutnya →'}</button>
+      </div>
+    </div>`;
+  });
+  
+  html += `<div id="${type}-result" class="hidden text-center bg-white/5 border border-white/10 rounded-2xl p-8">
+    <div class="text-5xl mb-3" id="${type}-emoji"></div>
+    <h3 class="text-2xl font-bold mb-2" id="${type}-score-text"></h3>
+    <p class="text-gray-400 text-sm mb-4" id="${type}-score-desc"></p>
+    <button onclick="goTo('menu')" class="nav-btn px-6 py-2 rounded-xl bg-amber-500/20 text-amber-400">Kembali ke Menu</button>
+  </div>`;
+  
+  container.innerHTML = html;
+}
+
+const answers = { pretest: {}, posttest: {} };
+
+function selectAnswer(type, qi, oi) {
+  const questions = type === 'pretest' ? pretestQuestions : posttestQuestions;
+  if (answers[type][qi] !== undefined) return;
+  answers[type][qi] = oi;
+  
+  const correct = questions[qi].answer;
+  document.getElementById(`${type}-${qi}-${oi}`).classList.add(oi === correct ? 'correct' : 'incorrect');
+  if (oi !== correct) document.getElementById(`${type}-${qi}-${correct}`).classList.add('correct');
+  
+  const fb = document.getElementById(`${type}-feedback-${qi}`);
+  fb.classList.remove('hidden');
+  fb.innerHTML = oi === correct ? '<span class="text-emerald-400">✅ Benar!</span>' : `<span class="text-red-400">❌ Kurang tepat. Jawaban yang benar: ${String.fromCharCode(65+correct)}</span>`;
+  
+  document.getElementById(`${type}-next-${qi}`).classList.remove('hidden');
+  document.getElementById(`${type}-dot-${qi}`).classList.remove('bg-white/10');
+  document.getElementById(`${type}-dot-${qi}`).classList.add(oi === correct ? 'bg-emerald-500' : 'bg-red-500');
+}
+
+function navQuiz(type, current, dir) {
+  const questions = type === 'pretest' ? pretestQuestions : posttestQuestions;
+  const next = current + dir;
+  
+  if (next >= questions.length) {
+    let score = 0;
+    questions.forEach((q, i) => { if (answers[type][i] === q.answer) score++; });
+    const pct = Math.round(score / questions.length * 100);
+    
+    if (type === 'pretest') pretestScore = pct;
+    else posttestScore = pct;
+    
+    document.getElementById(`${type}-q-${current}`).classList.add('hidden');
+    const res = document.getElementById(`${type}-result`);
+    res.classList.remove('hidden');
+    document.getElementById(`${type}-emoji`).textContent = pct >= 80 ? '🏆' : pct >= 60 ? '👍' : '💪';
+    document.getElementById(`${type}-score-text`).textContent = `Skor: ${score}/${questions.length} (${pct}%)`;
+    document.getElementById(`${type}-score-desc`).textContent = pct >= 80 ? 'Luar biasa! Pemahaman sangat baik!' : pct >= 60 ? 'Cukup baik! Terus tingkatkan!' : 'Tetap semangat! Pelajari materi lebih dalam.';
+    return;
+  }
+  
+  document.getElementById(`${type}-q-${current}`).classList.add('hidden');
+  document.getElementById(`${type}-q-${next}`).classList.remove('hidden');
+}
+
+// SIMULASI
+let selectedSystem = null;
+
+function selectSystem(sys) {
+  selectedSystem = sys;
+  updateSim2();
+}
+
+function updateSim2() {
+  const parpol = parseInt(document.getElementById('parpol-slider').value);
+  const kekuatan = parseInt(document.getElementById('kekuatan-slider').value);
+  
+  document.getElementById('sim-parpol').textContent = parpol;
+  document.getElementById('sim-kekuatan').textContent = kekuatan + '%';
+  
+  if (!selectedSystem) {
+    document.getElementById('sys-choice').textContent = 'Belum dipilih';
+    return;
+  }
+  
+  let choice, stability, speed, fragment, explanation;
+  
+  if (selectedSystem === 'parlemen') {
+    choice = '🏛️ Parlementer';
+    const stabilityScore = Math.max(20, 100 - parpol * 2);
+    stability = stabilityScore > 70 ? 'Tinggi ✅' : stabilityScore > 40 ? 'Sedang ⚠️' : 'Rendah ❌';
+    const speedScore = Math.max(10, 100 - parpol * 2);
+    speed = speedScore > 70 ? 'Cepat ✅' : speedScore > 40 ? 'Sedang ⚠️' : 'Lambat ❌';
+    const fragmentScore = parpol;
+    fragment = fragmentScore > 20 ? 'Sangat Tinggi ⚠️' : fragmentScore > 10 ? 'Tinggi ⚠️' : 'Rendah ✅';
+    
+    explanation = `<strong>Sistem Parlementer (seperti 1950-1959):</strong><br>
+      Dengan ${parpol} partai, koalisi sulit dibentuk, kabilinet sering jatuh, keputusan lambat tapi lebih demokratis. Parlemen dominan, presiden lemah. Cocok untuk stabilitas & kebebasan tapi rentan fragmentasi.`;
+  } else {
+    choice = '⚡ Presidensial';
+    const stabilityScore = kekuatan;
+    stability = stabilityScore > 70 ? 'Tinggi ✅' : stabilityScore > 40 ? 'Sedang ⚠️' : 'Rendah ❌';
+    const speedScore = kekuatan;
+    speed = speedScore > 70 ? 'Cepat ✅' : speedScore > 40 ? 'Sedang ⚠️' : 'Lambat ❌';
+    const fragmentScore = kekuatan > 70 ? 10 : 15;
+    fragment = fragmentScore > 12 ? 'Sedang ⚠️' : 'Rendah ✅';
+    
+    explanation = `<strong>Sistem Presidensial (Modern):</strong><br>
+      Presiden kuat (${kekuatan}%), eksekutif stabil, keputusan cepat. Parlemen lemah, fragmentasi parpol berkurang. Rentan otoriter jika presiden tidak diawasi. Cocok untuk stabilitas & pembangunan tapi perlu check & balances.`;
+  }
+  
+  document.getElementById('sys-choice').textContent = choice;
+  document.getElementById('sys-stability').textContent = stability;
+  document.getElementById('sys-speed').textContent = speed;
+  document.getElementById('sys-fragment').textContent = fragment;
+  document.getElementById('sys-explanation').innerHTML = explanation;
+}
+
+// REFLEKSI & DATA SAVE
+async function saveRefleksi() {
+  const peristiwa = document.getElementById('ref-peristiwa').value.trim();
+  const perasaan = document.getElementById('ref-perasaan').value.trim();
+  const pembelajaran = document.getElementById('ref-pembelajaran').value.trim();
+  const penerapan = document.getElementById('ref-penerapan').value.trim();
+  
+  if (!peristiwa || !perasaan || !pembelajaran || !penerapan) {
+    showNotif('Mohon isi semua kolom refleksi!', false);
+    return;
+  }
+  
+  const improvement = posttestScore && pretestScore ? posttestScore - pretestScore : 0;
+  
+  const dataToSave = {
+    nama_siswa: studentName,
+    kelas: studentClass,
+    tanggal: studentDate,
+    pretest_score: pretestScore || 0,
+    posttest_score: posttestScore || 0,
+    improvement: improvement,
+    peristiwa: peristiwa,
+    perasaan: perasaan,
+    pembelajaran: pembelajaran,
+    penerapan: penerapan,
+    timestamp: new Date().toISOString()
+  };
+  
+  if (currentRecordId) {
+    const record = allStudentData.find(r => r.__backendId === currentRecordId);
+    if (record) {
+      Object.assign(record, dataToSave);
+      const result = await window.dataSdk.update(record);
+      if (result.isError) {
+        showNotif('Gagal menyimpan data', false);
+        return;
+      }
+    }
+  } else {
+    const result = await window.dataSdk.create(dataToSave);
+    if (result.isError) {
+      showNotif('Gagal menyimpan data', false);
+      return;
+    }
+  }
+  
+  showNotif('✅ Refleksi & hasil belajar tersimpan di Canva Sheet!', true);
+}
+
+function showNotif(msg, isSuccess) {
+  const notif = document.getElementById('notif-container');
+  const el = document.createElement('div');
+  el.className = `px-6 py-3 rounded-xl text-sm font-semibold mb-2 ${isSuccess ? 'bg-emerald-500/20 border border-emerald-500/30 text-emerald-300' : 'bg-red-500/20 border border-red-500/30 text-red-300'}`;
+  el.textContent = msg;
+  notif.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+// HASIL
+function renderHasil() {
+  const container = document.getElementById('hasil-content');
+  let html = `<div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+    <h3 class="font-bold text-lg mb-4">📈 Perbandingan Skor</h3>
+    <div class="grid grid-cols-2 gap-6">
+      <div>
+        <div class="text-3xl font-bold ${pretestScore !== null ? (pretestScore >= 60 ? 'text-emerald-400' : 'text-yellow-400') : 'text-gray-500'}">${pretestScore !== null ? pretestScore + '%' : '-'}</div>
+        <p class="text-gray-400 text-sm mt-1">Pre-Test</p>
+      </div>
+      <div>
+        <div class="text-3xl font-bold ${posttestScore !== null ? (posttestScore >= 60 ? 'text-emerald-400' : 'text-yellow-400') : 'text-gray-500'}">${posttestScore !== null ? posttestScore + '%' : '-'}</div>
+        <p class="text-gray-400 text-sm mt-1">Post-Test</p>
+      </div>
+    </div>`;
+  
+  if (pretestScore !== null && posttestScore !== null) {
+    const gain = posttestScore - pretestScore;
+    html += `<div class="mt-4 pt-4 border-t border-white/10">
+      <p class="text-sm text-gray-400">Peningkatan: <span class="font-bold ${gain >= 0 ? 'text-emerald-400' : 'text-red-400'}">${gain >= 0 ? '+' : ''}${gain}%</span></p>
+      <p class="text-xs text-gray-500 mt-1">${gain >= 20 ? 'Peningkatan luar biasa! 🎉' : gain >= 10 ? 'Ada kemajuan yang baik! 👍' : gain >= 0 ? 'Tetap konsisten, tingkatkan lagi!' : 'Perlu review materi lebih dalam.'}</p>
+    </div>`;
+  }
+  
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// NAVIGATION
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+  document.getElementById('page-' + page).classList.remove('hidden');
+  currentPage = page;
+  
+  if (page === 'materi') showMateri(0);
+  if (page === 'pretest') { answers.pretest = {}; renderQuiz('pretest-container', pretestQuestions, 'pretest'); }
+  if (page === 'posttest') { answers.posttest = {}; renderQuiz('posttest-container', posttestQuestions, 'posttest'); }
+  if (page === 'hasil') renderHasil();
+  
+  window.scrollTo(0, 0);
+  lucide.createIcons();
+}
+
+function showMateri(idx) {
+  document.getElementById('materi-content').innerHTML = materiData[idx].content;
+  for (let i = 0; i < 4; i++) {
+    const tab = document.getElementById('mtab-' + i);
+    tab.className = i === idx ? 'tab-active px-4 py-2 rounded-xl text-sm font-semibold transition-all' : 'px-4 py-2 rounded-xl text-sm font-semibold bg-white/5 hover:bg-white/10 transition-all';
+  }
+}
+
+function startLearning() {
+  studentName = document.getElementById('input-name').value.trim() || 'Siswa';
+  studentClass = document.getElementById('input-class').value.trim() || 'XII';
+  studentDate = document.getElementById('input-date').value || new Date().toISOString().split('T')[0];
+  document.getElementById('menu-name').textContent = studentName;
+  goTo('menu');
+}
+
+// PARTICLES
+function createParticles() {
+  const container = document.getElementById('particles');
+  const colors = ['#f59e0b', '#f97316', '#d97706', '#ea580c', '#fb923c'];
+  for (let i = 0; i < 15; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 6 + 3 + 'px';
+    p.style.height = p.style.width;
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 4 + 's';
+    container.appendChild(p);
+  }
+}
+
+// INIT SDK
+const dataHandler = {
+  onDataChanged(data) {
+    allStudentData = data;
+  }
+};
+
+async function initializeApp() {
+  const result = await window.dataSdk.init(dataHandler);
+  if (!result.isOk) {
+    console.error('Failed to init data SDK');
+  }
+}
+
+initializeApp();
+
+const defaultConfig = {
+  main_title: 'Masa Demokrasi Liberal (1950-1959)',
+  school_name: 'SMA Negeri 97 Jakarta',
+  background_color: '#1a1a2e',
+  surface_color: '#16213e',
+  text_color: '#f1f5f9',
+  primary_action: '#f59e0b',
+  secondary_action: '#fb923c'
+};
+
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange: async (config) => {
+    document.getElementById('display-title').textContent = config.main_title || defaultConfig.main_title;
+    document.getElementById('display-school').textContent = config.school_name || defaultConfig.school_name;
+    
+    const app = document.getElementById('app');
+    const primary = config.primary_action || defaultConfig.primary_action;
+    const bg = config.background_color || defaultConfig.background_color;
+    const text = config.text_color || defaultConfig.text_color;
+    
+    app.style.color = text;
+    document.querySelectorAll('.nunito').forEach(el => {
+      if (config.font_family) el.style.fontFamily = config.font_family + ', Nunito, sans-serif';
+    });
+    if (config.font_family) document.body.style.fontFamily = config.font_family + ', Poppins, sans-serif';
+    if (config.font_size) {
+      const base = config.font_size;
+      document.body.style.fontSize = base + 'px';
+    }
+  },
+  mapToCapabilities: (config) => ({
+    recolorables: [
+      { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+      { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+      { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+      { get: () => config.primary_action || defaultConfig.primary_action, set: (v) => { config.primary_action = v; window.elementSdk.setConfig({ primary_action: v }); } },
+      { get: () => config.secondary_action || defaultConfig.secondary_action, set: (v) => { config.secondary_action = v; window.elementSdk.setConfig({ secondary_action: v }); } }
+    ],
+    borderables: [],
+    fontEditable: { get: () => config.font_family || defaultConfig.font_family || 'Poppins', set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+    fontSizeable: { get: () => config.font_size || 16, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+  }),
+  mapToEditPanelValues: (config) => new Map([
+    ['main_title', config.main_title || defaultConfig.main_title],
+    ['school_name', config.school_name || defaultConfig.school_name]
+  ])
+});
+
+createParticles();
+document.getElementById('input-date').value = new Date().toISOString().split('T')[0];
+lucide.createIcons();
+</script>
+  <script src="https://cdn.tailwindcss.com/3.4.17"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lucide@0.263.0/dist/umd/lucide.min.js"></script>
+  <script src="/_sdk/element_sdk.js"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&amp;family=Poppins:wght@300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+  <style>
+    * { font-family: 'Poppins', sans-serif; }
+    .nunito { font-family: 'Nunito', sans-serif; }
+    
+    @keyframes float { 0%,100%{transform:translateY(0)} 50%{transform:translateY(-10px)} }
+    @keyframes pulse-glow { 0%,100%{box-shadow:0 0 20px rgba(16,185,129,0.3)} 50%{box-shadow:0 0 40px rgba(16,185,129,0.6)} }
+    @keyframes gradient-shift { 0%{background-position:0% 50%} 50%{background-position:100% 50%} 100%{background-position:0% 50%} }
+    @keyframes slide-up { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes ripple { 0%{transform:scale(0.8);opacity:1} 100%{transform:scale(2.4);opacity:0} }
+    
+    .float { animation: float 3s ease-in-out infinite; }
+    .pulse-glow { animation: pulse-glow 2s ease-in-out infinite; }
+    .gradient-bg { background: linear-gradient(135deg, #0f172a, #1e3a5f, #0f4c3a, #1a1a2e); background-size: 400% 400%; animation: gradient-shift 15s ease infinite; }
+    .slide-up { animation: slide-up 0.6s ease forwards; }
+    .card-hover { transition: all 0.3s ease; }
+    .card-hover:hover { transform: translateY(-5px) scale(1.02); box-shadow: 0 20px 40px rgba(0,0,0,0.3); }
+    
+    .nav-btn { transition: all 0.2s; }
+    .nav-btn:hover { transform: scale(1.05); }
+    .nav-btn:active { transform: scale(0.95); }
+    
+    .option-btn { transition: all 0.2s; border: 2px solid rgba(255,255,255,0.1); }
+    .option-btn:hover { border-color: rgba(16,185,129,0.5); background: rgba(16,185,129,0.1); }
+    .option-btn.selected { border-color: #10b981; background: rgba(16,185,129,0.2); }
+    .option-btn.correct { border-color: #10b981; background: rgba(16,185,129,0.3); }
+    .option-btn.incorrect { border-color: #ef4444; background: rgba(239,68,68,0.2); }
+    
+    .progress-bar { transition: width 0.5s ease; }
+    
+    .particle {
+      position: absolute; border-radius: 50%; pointer-events: none; opacity: 0.3;
+      animation: float 4s ease-in-out infinite;
+    }
+    
+    .tab-active { background: linear-gradient(135deg, #10b981, #059669); color: white; }
+    
+    .sim-water { background: linear-gradient(180deg, #1e40af 0%, #1e3a8a 100%); transition: background 1s; }
+    .sim-water.polluted-low { background: linear-gradient(180deg, #374151 0%, #1f2937 100%); }
+    .sim-water.polluted-med { background: linear-gradient(180deg, #4a3728 0%, #3d2d1f 100%); }
+    .sim-water.polluted-high { background: linear-gradient(180deg, #1c1917 0%, #0c0a09 100%); }
+    
+    input:focus, textarea:focus { outline: none; box-shadow: 0 0 0 3px rgba(16,185,129,0.3); }
+    
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(255,255,255,0.05); }
+    ::-webkit-scrollbar-thumb { background: rgba(16,185,129,0.4); border-radius: 3px; }
+  </style>
+  <style>body { box-sizing: border-box; }</style>
+  <script src="/_sdk/data_sdk.js" type="text/javascript"></script>
+  <div id="app" class="h-full w-full gradient-bg text-white overflow-auto relative"><!-- Notification Container -->
+   <div id="notif-container" class="fixed top-4 right-4 z-50"></div><!-- Particles -->
+   <div id="particles" class="fixed inset-0 pointer-events-none overflow-hidden"></div><!-- PAGES -->
+   <div id="page-home" class="page min-h-full flex items-center justify-center p-4">
+    <div class="max-w-lg w-full slide-up">
+     <div class="text-center mb-8">
+      <div class="inline-flex items-center gap-2 bg-amber-500/20 border border-amber-500/30 rounded-full px-4 py-1 text-sm text-amber-300 mb-4"><i data-lucide="book-open" style="width:16px;height:16px"></i> Sejarah Kelas XII • Fase F
+      </div>
+      <h1 id="display-title" class="nunito text-4xl md:text-5xl font-900 bg-gradient-to-r from-amber-300 via-orange-200 to-red-300 bg-clip-text text-transparent mb-3">Masa Demokrasi Liberal (1950-1959)</h1>
+      <p id="display-school" class="text-gray-400 text-sm">SMA Negeri 97 Jakarta</p>
+     </div>
+     <div class="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 space-y-5">
+      <div><label class="text-xs text-gray-400 uppercase tracking-wider mb-1 block">Nama Siswa</label> <input id="input-name" type="text" placeholder="Masukkan nama lengkap..." class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500">
+      </div>
+      <div class="grid grid-cols-2 gap-4">
+       <div><label class="text-xs text-gray-400 uppercase tracking-wider mb-1 block">Kelas</label> <input id="input-class" type="text" placeholder="XII MIPA 1" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500">
+       </div>
+       <div><label class="text-xs text-gray-400 uppercase tracking-wider mb-1 block">Tanggal</label> <input id="input-date" type="date" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white placeholder-gray-500">
+       </div>
+      </div><button onclick="startLearning()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-400 hover:to-teal-400 rounded-xl py-4 font-bold text-lg nav-btn pulse-glow mt-4"> 🚀 Mulai Pembelajaran </button>
+     </div>
+    </div>
+   </div><!-- MENU PAGE -->
+   <div id="page-menu" class="page min-h-full p-6 hidden">
+    <div class="max-w-4xl mx-auto slide-up">
+     <div class="text-center mb-8">
+      <p class="text-emerald-400 text-sm mb-1">Selamat datang, <span id="menu-name" class="font-bold"></span>!</p>
+      <h2 class="nunito text-3xl font-800 text-white">Menu Pembelajaran</h2>
+     </div>
+     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
+      <div onclick="goTo('pretest')" class="card-hover cursor-pointer bg-gradient-to-br from-blue-500/20 to-blue-600/10 border border-blue-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        📝
+       </div>
+       <h3 class="font-bold text-lg">Pre-Test</h3>
+       <p class="text-gray-400 text-sm mt-1">Uji pengetahuan awal</p>
+      </div>
+      <div onclick="goTo('materi')" class="card-hover cursor-pointer bg-gradient-to-br from-emerald-500/20 to-emerald-600/10 border border-emerald-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        📚
+       </div>
+       <h3 class="font-bold text-lg">Materi</h3>
+       <p class="text-gray-400 text-sm mt-1">Pencemaran Lingkungan</p>
+      </div>
+      <div onclick="goTo('simulasi')" class="card-hover cursor-pointer bg-gradient-to-br from-purple-500/20 to-purple-600/10 border border-purple-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        🧪
+       </div>
+       <h3 class="font-bold text-lg">Simulasi</h3>
+       <p class="text-gray-400 text-sm mt-1">Simulasi pencemaran air</p>
+      </div>
+      <div onclick="goTo('posttest')" class="card-hover cursor-pointer bg-gradient-to-br from-orange-500/20 to-orange-600/10 border border-orange-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        🎯
+       </div>
+       <h3 class="font-bold text-lg">Post-Test</h3>
+       <p class="text-gray-400 text-sm mt-1">Uji pemahaman akhir</p>
+      </div>
+      <div onclick="goTo('refleksi')" class="card-hover cursor-pointer bg-gradient-to-br from-pink-500/20 to-pink-600/10 border border-pink-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        💭
+       </div>
+       <h3 class="font-bold text-lg">Refleksi 4P</h3>
+       <p class="text-gray-400 text-sm mt-1">Peristiwa, Perasaan, Pembelajaran, Penerapan</p>
+      </div>
+      <div onclick="goTo('hasil')" class="card-hover cursor-pointer bg-gradient-to-br from-yellow-500/20 to-yellow-600/10 border border-yellow-500/20 rounded-2xl p-6 text-center">
+       <div class="text-4xl mb-3">
+        📊
+       </div>
+       <h3 class="font-bold text-lg">Hasil Belajar</h3>
+       <p class="text-gray-400 text-sm mt-1">Lihat skor &amp; progres</p>
+      </div>
+     </div>
+    </div>
+   </div><!-- MATERI PAGE -->
+   <div id="page-materi" class="page min-h-full p-6 hidden">
+    <div class="max-w-4xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button> <!-- Tabs -->
+     <div class="flex flex-wrap gap-2 mb-6"><button onclick="showMateri(0)" id="mtab-0" class="tab-active px-4 py-2 rounded-xl text-sm font-semibold transition-all">Pengertian</button> <button onclick="showMateri(1)" id="mtab-1" class="px-4 py-2 rounded-xl text-sm font-semibold bg-white/5 hover:bg-white/10 transition-all">Jenis Pencemaran</button> <button onclick="showMateri(2)" id="mtab-2" class="px-4 py-2 rounded-xl text-sm font-semibold bg-white/5 hover:bg-white/10 transition-all">Dampak</button> <button onclick="showMateri(3)" id="mtab-3" class="px-4 py-2 rounded-xl text-sm font-semibold bg-white/5 hover:bg-white/10 transition-all">Penanggulangan</button>
+     </div>
+     <div id="materi-content" class="bg-white/5 backdrop-blur border border-white/10 rounded-2xl p-6 md:p-8 leading-relaxed"></div>
+    </div>
+   </div><!-- SIMULASI PAGE -->
+   <div id="page-simulasi" class="page min-h-full p-6 hidden">
+    <div class="max-w-4xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button>
+     <h2 class="nunito text-2xl font-800 mb-4">🧪 Simulasi Pencemaran Air</h2>
+     <p class="text-gray-400 mb-6 text-sm">Geser slider untuk melihat efek pencemaran pada ekosistem perairan.</p>
+     <div class="grid md:grid-cols-2 gap-6">
+      <div>
+       <div id="sim-pond" class="sim-water rounded-2xl h-64 relative overflow-hidden flex items-end justify-center p-4">
+        <div id="sim-fish" class="flex gap-2 transition-all duration-1000"><span class="text-3xl">🐟</span><span class="text-3xl">🐠</span><span class="text-3xl">🐡</span><span class="text-3xl">🦐</span><span class="text-3xl">🐢</span>
+        </div>
+        <div id="sim-trash" class="absolute top-4 left-4 opacity-0 transition-opacity duration-1000 text-2xl">
+         🗑️💀☠️
+        </div>
+       </div>
+       <div class="mt-4"><label class="text-sm text-gray-300 block mb-2">Tingkat Polusi: <span id="pol-level" class="text-emerald-400 font-bold">0%</span></label> <input id="pol-slider" type="range" min="0" max="100" value="0" oninput="updateSim()" class="w-full accent-emerald-500">
+       </div>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+       <h3 class="font-bold text-emerald-400 mb-3">📊 Indikator Ekosistem</h3>
+       <div class="space-y-3 text-sm" id="sim-indicators">
+        <div>
+         <span class="text-gray-400">Kadar Oksigen (DO):</span> <span id="ind-do" class="font-bold text-emerald-400">8 mg/L</span>
+        </div>
+        <div>
+         <span class="text-gray-400">pH Air:</span> <span id="ind-ph" class="font-bold text-emerald-400">7.0</span>
+        </div>
+        <div>
+         <span class="text-gray-400">Populasi Ikan:</span> <span id="ind-fish" class="font-bold text-emerald-400">100%</span>
+        </div>
+        <div>
+         <span class="text-gray-400">Kekeruhan (NTU):</span> <span id="ind-turb" class="font-bold text-emerald-400">5</span>
+        </div>
+        <div>
+         <span class="text-gray-400">Status:</span> <span id="ind-status" class="font-bold text-emerald-400">Sehat ✅</span>
+        </div>
+       </div>
+       <div id="sim-explanation" class="mt-4 p-3 bg-emerald-500/10 border border-emerald-500/20 rounded-xl text-xs text-gray-300">
+        Air bersih dengan ekosistem seimbang. Organisme akuatik hidup dengan baik.
+       </div>
+      </div>
+     </div>
+    </div>
+   </div><!-- PRE-TEST PAGE -->
+   <div id="page-pretest" class="page min-h-full p-6 hidden">
+    <div class="max-w-3xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button>
+     <div class="text-center mb-6">
+      <h2 class="nunito text-2xl font-800">📝 Pre-Test</h2>
+      <p class="text-gray-400 text-sm">Uji pengetahuan awal kamu tentang pencemaran lingkungan</p>
+     </div>
+     <div id="pretest-container"></div>
+    </div>
+   </div><!-- POST-TEST PAGE -->
+   <div id="page-posttest" class="page min-h-full p-6 hidden">
+    <div class="max-w-3xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button>
+     <div class="text-center mb-6">
+      <h2 class="nunito text-2xl font-800">🎯 Post-Test</h2>
+      <p class="text-gray-400 text-sm">Uji pemahaman setelah mempelajari materi</p>
+     </div>
+     <div id="posttest-container"></div>
+    </div>
+   </div><!-- REFLEKSI PAGE -->
+   <div id="page-refleksi" class="page min-h-full p-6 hidden">
+    <div class="max-w-3xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button>
+     <h2 class="nunito text-2xl font-800 text-center mb-6">💭 Refleksi 4P</h2>
+     <div class="space-y-5">
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+       <h3 class="font-bold text-blue-400 mb-2">📌 Peristiwa</h3>
+       <p class="text-gray-400 text-xs mb-2">Apa yang terjadi selama pembelajaran hari ini?</p><textarea id="ref-peristiwa" rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 resize-none" placeholder="Tuliskan peristiwa yang kamu alami..."></textarea>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+       <h3 class="font-bold text-pink-400 mb-2">❤️ Perasaan</h3>
+       <p class="text-gray-400 text-xs mb-2">Apa yang kamu rasakan selama belajar?</p><textarea id="ref-perasaan" rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 resize-none" placeholder="Ungkapkan perasaanmu..."></textarea>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+       <h3 class="font-bold text-emerald-400 mb-2">💡 Pembelajaran</h3>
+       <p class="text-gray-400 text-xs mb-2">Apa yang kamu pelajari hari ini?</p><textarea id="ref-pembelajaran" rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 resize-none" placeholder="Tuliskan hal yang kamu pelajari..."></textarea>
+      </div>
+      <div class="bg-white/5 border border-white/10 rounded-2xl p-5">
+       <h3 class="font-bold text-yellow-400 mb-2">🎯 Penerapan</h3>
+       <p class="text-gray-400 text-xs mb-2">Bagaimana kamu akan menerapkan pembelajaran ini?</p><textarea id="ref-penerapan" rows="3" class="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-white text-sm placeholder-gray-500 resize-none" placeholder="Rencana penerapanmu..."></textarea>
+      </div><button onclick="saveRefleksi()" class="w-full bg-gradient-to-r from-emerald-500 to-teal-500 rounded-xl py-3 font-bold nav-btn">Simpan Refleksi ✨</button>
+      <div id="refleksi-saved" class="hidden text-center text-emerald-400 text-sm py-2">
+       ✅ Refleksi berhasil disimpan!
+      </div>
+     </div>
+    </div>
+   </div><!-- HASIL PAGE -->
+   <div id="page-hasil" class="page min-h-full p-6 hidden">
+    <div class="max-w-3xl mx-auto slide-up"><button onclick="goTo('menu')" class="nav-btn flex items-center gap-2 text-gray-400 hover:text-white mb-6"> <i data-lucide="arrow-left" style="width:18px;height:18px"></i> Kembali ke Menu </button>
+     <h2 class="nunito text-2xl font-800 text-center mb-6">📊 Hasil Belajar</h2>
+     <div id="hasil-content" class="space-y-4"></div>
+    </div>
+   </div>
+  </div>
+  <script>
+// STATE
+let studentName = '', studentClass = '', studentDate = '';
+let pretestScore = null, posttestScore = null;
+let currentPage = 'home';
+let currentRecordId = null;
+let allStudentData = [];
+
+// MATERI DATA
+const materiData = [
+  {
+    title: 'Pengertian & Latar Belakang',
+    content: `
+      <h3 class="text-xl font-bold text-amber-400 mb-4">📖 Masa Demokrasi Liberal (1950-1959)</h3>
+      <p class="mb-4">Demokrasi Liberal adalah periode ketika Indonesia menerapkan sistem demokrasi parlementer dengan kebebasan berpolitik yang luas. Periode ini dimulai setelah diakuinya kedaulatan Indonesia (1949) dan berakhir pada 1959 ketika Presiden Sukarno mendeklarasikan Demokrasi Terpimpin.</p>
+      <div class="bg-amber-500/10 border border-amber-500/20 rounded-xl p-4 mb-4">
+        <h4 class="font-bold text-amber-300 mb-2">🔑 Karakteristik Demokrasi Liberal:</h4>
+        <ul class="list-disc list-inside space-y-1 text-sm text-gray-300">
+          <li><strong>Sistem Parlementer</strong> — Parlemen memiliki kekuatan besar</li>
+          <li><strong>Kebebasan Berpolitik</strong> — Banyak partai, pers bebas</li>
+          <li><strong>Kabinet Koalisi</strong> — Pemerintahan bergantung pada suara parlemen</li>
+          <li><strong>Presiden Sebagai Simbol</strong> — Kekuasaan eksekutif terbatas</li>
+          <li><strong>Pemilihan Umum</strong> — 1955 adalah pemilu pertama di Indonesia</li>
+        </ul>
+      </div>
+      <div class="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4">
+        <h4 class="font-bold text-orange-300 mb-2">📅 Konstitusi & Dasar Hukum:</h4>
+        <ul class="text-sm text-gray-300 space-y-1">
+          <li><strong>Konstitusi RIS (1949-1950)</strong> — Konstitusi sementara</li>
+          <li><strong>UUD 1950</strong> — Konstitusi Sementara Republik Indonesia Serikat</li>
+          <li><strong>Pembentukan Konstituante</strong> — Untuk menyusun UUD yang tetap</li>
+        </ul>
+      </div>
+    `
+  },
+  {
+    title: 'Kehidupan Politik & Partai',
+    content: `
+      <h3 class="text-xl font-bold text-amber-400 mb-4">🏛️ Landscape Politik Masa Demokrasi Liberal</h3>
+      
+      <div class="space-y-4">
+        <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-red-300 mb-2">🔴 1. Partai Nasional Indonesia (PNI)</h4>
+          <p class="text-sm text-gray-300 mb-2">Partai penerus Partai Nasional Indonesia (1945), menjadi partai besar di era Demokrasi Liberal.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Pemimpin: Ali Sastroamijoyo</li>
+            <li>Fokus: Nasionalisme, sosialisme moderate</li>
+            <li>Basis: Kalangan intelektual, pegawai negeri</li>
+          </ul>
+        </div>
+        
+        <div class="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-orange-300 mb-2">🟠 2. Masyumi (Majlis Syuro Muslimin Indonesia)</h4>
+          <p class="text-sm text-gray-300 mb-2">Partai Islam terbesar, mewakili aspirasi umat muslim di Indonesia.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Pemimpin: Muhammad Natsir, Syafruddin Prawiranegara</li>
+            <li>Fokus: Islam, demokrasi Islam</li>
+            <li>Basis: Santri, kalangan Islam tradisional & modern</li>
+          </ul>
+        </div>
+        
+        <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-yellow-300 mb-2">🟡 3. Partai Komunis Indonesia (PKI)</h4>
+          <p class="text-sm text-gray-300 mb-2">Partai komunis yang berkembang pesat, memenangkan pemilu 1955.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Pemimpin: D.N. Aidit</li>
+            <li>Fokus: Komunisme, revolusi sosial</li>
+            <li>Basis: Petani, buruh, intelektual radikal</li>
+          </ul>
+        </div>
+        
+        <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-blue-300 mb-2">🔵 4. PSI (Partai Sosialis Indonesia)</h4>
+          <p class="text-sm text-gray-300 mb-2">Partai sosialis demokrat yang mewakili golongan intelektual.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Pemimpin: Soemitro</li>
+            <li>Fokus: Sosialisme demokrat</li>
+            <li>Basis: Intelektual, buruh urban</li>
+          </ul>
+        </div>
+      </div>
+    `
+  },
+  {
+    title: 'Peristiwa Penting & Krisis',
+    content: `
+      <h3 class="text-xl font-bold text-amber-400 mb-4">⚡ Peristiwa & Krisis Masa Demokrasi Liberal</h3>
+      
+      <div class="space-y-4">
+        <div class="bg-purple-500/10 border border-purple-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-purple-300 mb-2">📍 1. Pemilihan Umum 1955 (Pemilu Pertama)</h4>
+          <p class="text-sm text-gray-300 mb-2">Pemilihan umum pertama di Indonesia yang demokratis dan jujur.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>PNI: 22% suara → 57 kursi</li>
+            <li>Masyumi: 20% suara → 57 kursi</li>
+            <li>NU: 18% suara → 45 kursi</li>
+            <li>PKI: 16% suara → 39 kursi</li>
+            <li>Hasil: Empat besar yang seimbang, sulit membentuk kabinet</li>
+          </ul>
+        </div>
+        
+        <div class="bg-red-500/10 border border-red-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-red-300 mb-2">🔥 2. Pemberontakan PRRI-Permesta (1956-1958)</h4>
+          <p class="text-sm text-gray-300 mb-2">Gerakan separatis di Sumatera & Sulawesi yang menolak dominasi Jawa.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>PRRI: Pemerintah Revolusioner RI (Sumatera)</li>
+            <li>PERMESTA: Perjuangan Semesta (Sulawesi)</li>
+            <li>Penyebab: Ketimpangan ekonomi, otonomi daerah</li>
+            <li>Hasil: Ditekan oleh TNI, tapi menunjukkan krisis federal</li>
+          </ul>
+        </div>
+        
+        <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-blue-300 mb-2">🎤 3. Konferensi Asia-Afrika 1955 (Bandung)</h4>
+          <p class="text-sm text-gray-300 mb-2">Konferensi internasional penting yang meningkatkan pengaruh Indonesia.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Peserta: Negara-negara Asia & Afrika</li>
+            <li>Hasil: Dasasila Bandung (Panca Azimat)</li>
+            <li>Dampak: Indonesia menjadi pemimpin dunia ketiga</li>
+          </ul>
+        </div>
+        
+        <div class="bg-yellow-500/10 border border-yellow-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-yellow-300 mb-2">📉 4. Ketidakstabilan Kabinet & Ekonomi</h4>
+          <p class="text-sm text-gray-300 mb-2">Parlemen terlalu kuat, kabinet sering jatuh, ekonomi terus merosot.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Berganti-ganti Perdana Menteri 7 kali (1950-1959)</li>
+            <li>Inflasi tinggi, devisa menipis</li>
+            <li>Hutang luar negeri membengkak</li>
+            <li>Gaji pegawai negeri menurun, korupsi meningkat</li>
+          </ul>
+        </div>
+        
+        <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-green-300 mb-2">🔚 5. Dekrit Presiden 5 Juli 1959</h4>
+          <p class="text-sm text-gray-300 mb-2">Sukarno membubarkan parlemen dan mengakhiri Demokrasi Liberal.</p>
+          <ul class="text-xs text-gray-400 list-disc list-inside space-y-1">
+            <li>Alasan: Parlemen mengabaikan presiden, konstituante deadlock</li>
+            <li>Hasil: Kembali ke UUD 1945 (Demokrasi Terpimpin)</li>
+            <li>Dampak: Penguatan Sukarno & PKI, diminusnya partai lain</li>
+          </ul>
+        </div>
+      </div>
+    `
+  },
+  {
+    title: 'Pencapaian & Warisan',
+    content: `
+      <h3 class="text-xl font-bold text-amber-400 mb-4">🏆 Pencapaian & Warisan Demokrasi Liberal</h3>
+      
+      <div class="space-y-4">
+        <div class="bg-green-500/10 border border-green-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-green-300 mb-2">✅ Pencapaian Positif</h4>
+          <ul class="text-sm text-gray-300 list-disc list-inside space-y-2">
+            <li><strong>Pemilu 1955</strong> — Pemilihan umum demokratis pertama yang adil & jujur</li>
+            <li><strong>Kebebasan Pers & Organisasi</strong> — Media, partai, & LSM berkembang pesat</li>
+            <li><strong>Diplomasi Internasional</strong> — Konferensi Bandung 1955 meningkatkan posisi Indonesia</li>
+            <li><strong>Konsolidasi Nasional</strong> — NKRI terbentuk, integrasi berbagai daerah & agama</li>
+            <li><strong>Pembangunan Infrastruktur</strong> — Jalan, listrik, sekolah dibangun di berbagai daerah</li>
+            <li><strong>Perolehan Irian Barat</strong> — Melalui negosiasi internasional</li>
+          </ul>
+        </div>
+        
+        <div class="bg-orange-500/10 border border-orange-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-orange-300 mb-2">⚠️ Kelemahan & Tantangan</h4>
+          <ul class="text-sm text-gray-300 list-disc list-inside space-y-2">
+            <li><strong>Parpol Terlalu Banyak</strong> — 34 partai di pemilu 1955, fragmentasi kekuatan</li>
+            <li><strong>Parlemen Terlalu Dominan</strong> — Presiden lemah, eksekutif tidak stabil</li>
+            <li><strong>Polarisasi Ideologi</strong> — Islam vs Komunis vs Nasionalis menciptakan tensi</li>
+            <li><strong>Krisis Ekonomi</strong> — Defisit anggaran, inflasi, pengangguran tinggi</li>
+            <li><strong>Ketidakstabilan Daerah</strong> — PRRI-Permesta, DI/TII, gerakan separatis</li>
+            <li><strong>Ketimpangan Sosial</strong> — Korupsi, koneksi bisnis mendominasi ekonomi</li>
+          </ul>
+        </div>
+        
+        <div class="bg-blue-500/10 border border-blue-500/20 rounded-xl p-4">
+          <h4 class="font-bold text-blue-300 mb-2">📚 Warisan bagi Demokrasi Indonesia</h4>
+          <ul class="text-sm text-gray-300 list-disc list-inside space-y-2">
+            <li>Pengalaman berharga tentang sistem parlementer & multipartai</li>
+            <li>Pentingnya stabilitas pemerintah & kekuatan eksekutif yang seimbang</li>
+            <li>Pelajaran tentang bahaya fragmentasi parpol & polarisasi ideologi</li>
+            <li>Inspirasi untuk era reformasi & demokrasi modern Indonesia (1998-sekarang)</li>
+            <li>Bukti bahwa demokrasi bisa dilaksanakan di negara berkembang</li>
+          </ul>
+        </div>
+      </div>
+    `
+  }
+];
+
+// SOAL PRE-TEST (C1-C3: Mudah-Sedang)
+const pretestQuestions = [
+  { q: 'Masa Demokrasi Liberal di Indonesia berlangsung pada tahun...', level: 'Mudah (C1)', options: ['1945-1950', '1950-1959', '1959-1966', '1998-2004'], answer: 1 },
+  { q: 'Sistem pemerintahan yang diterapkan pada masa Demokrasi Liberal adalah...', level: 'Mudah (C1)', options: ['Presidensial', 'Parlementer', 'Monarkhi Konstitusional', 'Diktator Militer'], answer: 1 },
+  { q: 'Pemilihan umum pertama di Indonesia dilaksanakan pada tahun...', level: 'Mudah (C1)', options: ['1950', '1955', '1960', '1965'], answer: 1 },
+  { q: 'Partai mana yang memenangkan pemilu 1955 dengan perolehan suara terbanyak?', level: 'Mudah (C1)', options: ['PKI', 'Masyumi', 'PNI dan Masyumi (keseimbangan)', 'PSI'], answer: 2 },
+  { q: 'Apa latar belakang lahirnya Demokrasi Liberal di Indonesia?', level: 'Sedang (C2)', options: ['Dipengaruhi oleh sistem Uni Soviet', 'Diakuinya kedaulatan Indonesia dan adopsi Konstitusi RIS', 'Keputusan Sukarno untuk memperlemah parlemen', 'Tekanan dari Barat'], answer: 1 },
+  { q: 'Peristiwa PRRI-Permesta menunjukkan...', level: 'Sedang (C2)', options: ['Keberhasilan demokrasi di daerah', 'Ketidakpuasan daerah terhadap dominasi Jawa dan ketimpangan ekonomi', 'Dukungan rakyat terhadap pemerintah pusat', 'Kesuksesan sistem parlementer'], answer: 1 },
+  { q: 'Konferensi Asia-Afrika 1955 di Bandung menghasilkan...', level: 'Sedang (C3)', options: ['Perjanjian perdagangan internasional', 'Dasasila Bandung yang menjadi prinsip negara-negara non-blok', 'Pembentukan Perserikatan Bangsa-Bangsa', 'Deklarasi perang terhadap komunisme'], answer: 1 },
+  { q: 'Berapa kali pergantian Perdana Menteri terjadi selama masa Demokrasi Liberal?', level: 'Sedang (C3)', options: ['3 kali', '5 kali', '7 kali', '10 kali'], answer: 2 },
+  { q: 'Apa masalah utama yang menyebabkan ketidakstabilan pemerintahan pada masa Demokrasi Liberal?', level: 'Sedang (C2)', options: ['Kurangnya dana dari rakyat', 'Parlemen memiliki kekuatan terlalu besar, kabinet bergantung pada koalisi yang rapuh', 'Sistem keamanan yang lemah', 'Tidak ada sistem peradilan yang jelas'], answer: 1 },
+  { q: 'Dekrit Presiden 5 Juli 1959 mengakhiri Demokrasi Liberal karena...', level: 'Sedang (C3)', options: ['Rakyat meminta langsung', 'Parlemen mengabaikan presiden & konstituante deadlock, Sukarno mengembalikan UUD 1945', 'Serangan militer dari luar negeri', 'Krisis ekonomi yang tidak dapat diatasi'], answer: 1 }
+];
+
+// SOAL POST-TEST (C3-C6: Sedang-Sulit)
+const posttestQuestions = [
+  { q: 'Analisis dampak positif Pemilu 1955 bagi konsolidasi demokrasi Indonesia!', level: 'Sedang (C3)', options: ['Tidak memberikan dampak apa pun', 'Membuktikan Indonesia mampu melaksanakan pemilu demokratis yang adil & jujur, memperkuat legitimasi pemerintah', 'Hanya menguntungkan partai tertentu', 'Menyebabkan chaos dan kerusuhan'], answer: 1 },
+  { q: 'Mengapa Konferensi Asia-Afrika 1955 dianggap pencapaian penting bagi diplomasi Indonesia?', level: 'Sulit (C4)', options: ['Karena menghasilkan perjanjian perdagangan yang menguntungkan', 'Karena Indonesia menjadi pemimpin gerakan non-blok & memperkuat posisi internasional di tengah Perang Dingin', 'Karena mendeklarasikan perang kepada negara lain', 'Karena mendapatkan bantuan finansial besar'], answer: 1 },
+  { q: 'Bandingkan kelemahan sistem parlementer pada masa Demokrasi Liberal dengan kekuatan sistem presidensial!', level: 'Sulit (C4)', options: ['Parlementer lebih kuat karena presiden dominan', 'Parlementer lemah (kabinet jatuh sering), presidensial kuat (eksekutif stabil, presiden punya wewenang jelas)', 'Keduanya sistem yang sama', 'Tidak ada perbedaan yang signifikan'], answer: 1 },
+  { q: 'Jika fragmentasi parpol pada pemilu 1955 tidak terjadi, apa konsekuensi bagi stabilitas pemerintah?', level: 'Sulit (C5)', options: ['Pemerintah tetap tidak stabil', 'Pemerintah akan lebih stabil, koalisi tunggal bisa terbentuk, keputusan lebih cepat', 'Akan terjadi diktatorship', 'Ekonomi akan lebih memburuk'], answer: 1 },
+  { q: 'Evaluasi: Apakah PRRI-Permesta merupakan bukti kegagalan demokrasi atau tantangan konsolidasi nasional?', level: 'Sulit (C5)', options: ['Bukti kegagalan total demokrasi', 'Tantangan konsolidasi: ketimpangan ekonomi & otonomi daerah menunjukkan demokrasi masih perlu penyesuaian, bukan kegagalan', 'Tidak ada dampak pada demokrasi', 'Kesalahan pihak militer semata'], answer: 1 },
+  { q: 'Rekonstruksi: Apa yang bisa dilakukan pemerintah untuk mencegah runtuhnya Demokrasi Liberal?', level: 'Sangat Sulit (C6)', options: ['Tidak ada cara untuk mencegahnya', 'Memperkuat koalisi multi-parpol yang stabil, mengatasi krisis ekonomi, memberikan otonomi daerah, mengurangi polarisasi ideologi', 'Hanya dengan pembatasan kebebasan pers', 'Mengandalkan dukungan militer penuh'], answer: 1 },
+  { q: 'Mengapa polarisasi ideologi antara Islam-Komunis-Nasionalis menjadi ancaman pada masa Demokrasi Liberal?', level: 'Sedang (C3)', options: ['Karena ketiga ideologi sama-sama lemah', 'Karena masing-masing blok ingin dominasi, menciptakan deadlock di parlemen, menghambat pembentukan kebijakan', 'Karena tidak ada undang-undang', 'Karena rakyat tidak tertarik pada ideologi'], answer: 1 },
+  { q: 'Kritik: Mengapa Dekrit Presiden 5 Juli 1959 dianggap sebagai akhir dari Demokrasi Liberal?', level: 'Sulit (C4)', options: ['Karena hanya simbolis saja', 'Karena Sukarno membubarkan parlemen, kembali ke UUD 1945, mengkonsentrasikan kekuasaan di tangan presiden, menandai berakhirnya sistem parlementer', 'Karena tidak ada pengaruh nyata', 'Karena rakyat menginginkan perubahan'], answer: 1 },
+  { q: 'Bagaimana ketimpangan ekonomi regional (Jawa vs Sumatera-Sulawesi) memicu PRRI-Permesta?', level: 'Sulit (C4)', options: ['Tidak ada hubungan antara ekonomi dan pemberontakan', 'Sumatera-Sulawesi merasa dimarginalisasi ekonomi, hasil bumi diambil pusat tanpa kompensasi adil, otonomi daerah diabaikan → pemberontakan', 'Hanya masalah budaya semata', 'Hasil dari propaganda komunis'], answer: 1 },
+  { q: 'Bagaimana warisan Demokrasi Liberal mempengaruhi perkembangan demokrasi Indonesia pasca-1998?', level: 'Sangat Sulit (C6)', options: ['Tidak ada warisan yang berarti', 'Memberikan pelajaran: pentingnya stabilitas eksekutif, bahaya fragmentasi parpol, desentralisasi yang lebih serius untuk integrasi nasional, inspirasi sistem presidensial & federalisme terbatas', 'Hanya membawa dampak negatif', 'Reformasi 1998 lepas dari sejarah Demokrasi Liberal'], answer: 1 }
+];
+
+// QUIZ ENGINE
+function renderQuiz(containerId, questions, type) {
+  const container = document.getElementById(containerId);
+  let html = '';
+  html += `<div class="mb-4 flex items-center justify-between"><span class="text-xs text-gray-400">${questions.length} soal</span><div class="flex gap-1">`;
+  questions.forEach((_, i) => { html += `<div class="w-3 h-3 rounded-full bg-white/10" id="${type}-dot-${i}"></div>`; });
+  html += '</div></div>';
+  
+  questions.forEach((q, i) => {
+    html += `<div id="${type}-q-${i}" class="${i > 0 ? 'hidden' : ''} bg-white/5 border border-white/10 rounded-2xl p-6 mb-4">
+      <div class="flex items-center gap-2 mb-1"><span class="text-xs px-2 py-0.5 rounded-full ${q.level.includes('Mudah') ? 'bg-green-500/20 text-green-400' : q.level.includes('Sedang') ? 'bg-yellow-500/20 text-yellow-400' : 'bg-red-500/20 text-red-400'}">${q.level}</span><span class="text-xs text-gray-500">Soal ${i+1}/${questions.length}</span></div>
+      <p class="font-semibold mb-4 text-sm">${q.q}</p>
+      <div class="space-y-2">`;
+    q.options.forEach((opt, j) => {
+      html += `<button onclick="selectAnswer('${type}',${i},${j})" id="${type}-${i}-${j}" class="option-btn w-full text-left px-4 py-3 rounded-xl text-sm">${String.fromCharCode(65+j)}. ${opt}</button>`;
+    });
+    html += `</div><div id="${type}-feedback-${i}" class="mt-3 text-sm hidden"></div>
+      <div class="flex justify-between mt-4">
+        <button onclick="navQuiz('${type}',${i},-1)" class="nav-btn px-4 py-2 rounded-lg bg-white/5 text-sm ${i===0?'invisible':''}">← Sebelumnya</button>
+        <button onclick="navQuiz('${type}',${i},1)" id="${type}-next-${i}" class="nav-btn px-4 py-2 rounded-lg bg-emerald-500/20 text-emerald-400 text-sm hidden">${i===questions.length-1?'Lihat Hasil →':'Selanjutnya →'}</button>
+      </div>
+    </div>`;
+  });
+  
+  html += `<div id="${type}-result" class="hidden text-center bg-white/5 border border-white/10 rounded-2xl p-8">
+    <div class="text-5xl mb-3" id="${type}-emoji"></div>
+    <h3 class="text-2xl font-bold mb-2" id="${type}-score-text"></h3>
+    <p class="text-gray-400 text-sm mb-4" id="${type}-score-desc"></p>
+    <button onclick="goTo('menu')" class="nav-btn px-6 py-2 rounded-xl bg-emerald-500/20 text-emerald-400">Kembali ke Menu</button>
+  </div>`;
+  
+  container.innerHTML = html;
+}
+
+const answers = { pretest: {}, posttest: {} };
+
+function selectAnswer(type, qi, oi) {
+  const questions = type === 'pretest' ? pretestQuestions : posttestQuestions;
+  if (answers[type][qi] !== undefined) return;
+  answers[type][qi] = oi;
+  
+  const correct = questions[qi].answer;
+  document.getElementById(`${type}-${qi}-${oi}`).classList.add(oi === correct ? 'correct' : 'incorrect');
+  if (oi !== correct) document.getElementById(`${type}-${qi}-${correct}`).classList.add('correct');
+  
+  const fb = document.getElementById(`${type}-feedback-${qi}`);
+  fb.classList.remove('hidden');
+  fb.innerHTML = oi === correct ? '<span class="text-emerald-400">✅ Benar!</span>' : `<span class="text-red-400">❌ Kurang tepat. Jawaban yang benar: ${String.fromCharCode(65+correct)}</span>`;
+  
+  document.getElementById(`${type}-next-${qi}`).classList.remove('hidden');
+  document.getElementById(`${type}-dot-${qi}`).classList.remove('bg-white/10');
+  document.getElementById(`${type}-dot-${qi}`).classList.add(oi === correct ? 'bg-emerald-500' : 'bg-red-500');
+}
+
+function navQuiz(type, current, dir) {
+  const questions = type === 'pretest' ? pretestQuestions : posttestQuestions;
+  const next = current + dir;
+  
+  if (next >= questions.length) {
+    // Show result
+    let score = 0;
+    questions.forEach((q, i) => { if (answers[type][i] === q.answer) score++; });
+    const pct = Math.round(score / questions.length * 100);
+    
+    if (type === 'pretest') pretestScore = pct;
+    else posttestScore = pct;
+    
+    document.getElementById(`${type}-q-${current}`).classList.add('hidden');
+    const res = document.getElementById(`${type}-result`);
+    res.classList.remove('hidden');
+    document.getElementById(`${type}-emoji`).textContent = pct >= 80 ? '🏆' : pct >= 60 ? '👍' : '💪';
+    document.getElementById(`${type}-score-text`).textContent = `Skor: ${score}/${questions.length} (${pct}%)`;
+    document.getElementById(`${type}-score-desc`).textContent = pct >= 80 ? 'Luar biasa! Pemahaman sangat baik!' : pct >= 60 ? 'Cukup baik! Terus tingkatkan!' : 'Tetap semangat! Pelajari materi lebih dalam.';
+    return;
+  }
+  
+  document.getElementById(`${type}-q-${current}`).classList.add('hidden');
+  document.getElementById(`${type}-q-${next}`).classList.remove('hidden');
+}
+
+// SIMULASI
+function updateSim() {
+  const val = parseInt(document.getElementById('pol-slider').value);
+  document.getElementById('pol-level').textContent = val + '%';
+  
+  const pond = document.getElementById('sim-pond');
+  pond.className = 'sim-water rounded-2xl h-64 relative overflow-hidden flex items-end justify-center p-4';
+  if (val > 70) pond.classList.add('polluted-high');
+  else if (val > 40) pond.classList.add('polluted-med');
+  else if (val > 15) pond.classList.add('polluted-low');
+  
+  const fishCount = Math.max(0, 5 - Math.floor(val / 20));
+  const fishEmojis = ['🐟','🐠','🐡','🦐','🐢'];
+  document.getElementById('sim-fish').innerHTML = fishEmojis.slice(0, fishCount).map(f => `<span class="text-3xl">${f}</span>`).join('');
+  document.getElementById('sim-trash').style.opacity = val > 30 ? '1' : '0';
+  
+  const doVal = Math.max(0, 8 - val * 0.07).toFixed(1);
+  const phVal = (7 - val * 0.025).toFixed(1);
+  const fishPct = Math.max(0, 100 - val * 1.1).toFixed(0);
+  const turb = (5 + val * 2).toFixed(0);
+  
+  const color = val > 60 ? 'text-red-400' : val > 30 ? 'text-yellow-400' : 'text-emerald-400';
+  document.getElementById('ind-do').className = `font-bold ${color}`;
+  document.getElementById('ind-do').textContent = doVal + ' mg/L';
+  document.getElementById('ind-ph').className = `font-bold ${color}`;
+  document.getElementById('ind-ph').textContent = phVal;
+  document.getElementById('ind-fish').className = `font-bold ${color}`;
+  document.getElementById('ind-fish').textContent = fishPct + '%';
+  document.getElementById('ind-turb').className = `font-bold ${color}`;
+  document.getElementById('ind-turb').textContent = turb + ' NTU';
+  
+  const status = val > 70 ? 'Kritis ☠️' : val > 40 ? 'Tercemar Berat ⚠️' : val > 15 ? 'Tercemar Ringan 🔶' : 'Sehat ✅';
+  document.getElementById('ind-status').className = `font-bold ${color}`;
+  document.getElementById('ind-status').textContent = status;
+  
+  const explanations = [
+    'Air bersih dengan ekosistem seimbang. Organisme akuatik hidup dengan baik.',
+    'Mulai terjadi penurunan kualitas air. Beberapa organisme sensitif mulai terganggu.',
+    'Pencemaran sedang. Oksigen terlarut rendah, populasi ikan menurun drastis. Terjadi eutrofikasi.',
+    'Pencemaran berat! Ekosistem hampir mati. Air berbau, berwarna gelap, tidak layak untuk kehidupan akuatik.'
+  ];
+  document.getElementById('sim-explanation').textContent = val > 70 ? explanations[3] : val > 40 ? explanations[2] : val > 15 ? explanations[1] : explanations[0];
+}
+
+// REFLEKSI & DATA SAVE
+async function saveRefleksi() {
+  const peristiwa = document.getElementById('ref-peristiwa').value.trim();
+  const perasaan = document.getElementById('ref-perasaan').value.trim();
+  const pembelajaran = document.getElementById('ref-pembelajaran').value.trim();
+  const penerapan = document.getElementById('ref-penerapan').value.trim();
+  
+  if (!peristiwa || !perasaan || !pembelajaran || !penerapan) {
+    showNotif('Mohon isi semua kolom refleksi!', false);
+    return;
+  }
+  
+  const improvement = posttestScore && pretestScore ? posttestScore - pretestScore : 0;
+  
+  const dataToSave = {
+    nama_siswa: studentName,
+    kelas: studentClass,
+    tanggal: studentDate,
+    pretest_score: pretestScore || 0,
+    posttest_score: posttestScore || 0,
+    improvement: improvement,
+    peristiwa: peristiwa,
+    perasaan: perasaan,
+    pembelajaran: pembelajaran,
+    penerapan: penerapan,
+    timestamp: new Date().toISOString()
+  };
+  
+  if (currentRecordId) {
+    const record = allStudentData.find(r => r.__backendId === currentRecordId);
+    if (record) {
+      Object.assign(record, dataToSave);
+      const result = await window.dataSdk.update(record);
+      if (result.isError) {
+        showNotif('Gagal menyimpan data', false);
+        return;
+      }
+    }
+  } else {
+    const result = await window.dataSdk.create(dataToSave);
+    if (result.isError) {
+      showNotif('Gagal menyimpan data', false);
+      return;
+    }
+  }
+  
+  showNotif('✅ Refleksi & hasil belajar tersimpan di Canva Sheet!', true);
+}
+
+function showNotif(msg, isSuccess) {
+  const notif = document.getElementById('notif-container');
+  const el = document.createElement('div');
+  el.className = `px-6 py-3 rounded-xl text-sm font-semibold mb-2 ${isSuccess ? 'bg-emerald-500/20 border border-emerald-500/30 text-emerald-300' : 'bg-red-500/20 border border-red-500/30 text-red-300'}`;
+  el.textContent = msg;
+  notif.appendChild(el);
+  setTimeout(() => el.remove(), 3000);
+}
+
+// HASIL
+function renderHasil() {
+  const container = document.getElementById('hasil-content');
+  let html = `<div class="bg-white/5 border border-white/10 rounded-2xl p-6 text-center">
+    <h3 class="font-bold text-lg mb-4">📈 Perbandingan Skor</h3>
+    <div class="grid grid-cols-2 gap-6">
+      <div>
+        <div class="text-3xl font-bold ${pretestScore !== null ? (pretestScore >= 60 ? 'text-emerald-400' : 'text-yellow-400') : 'text-gray-500'}">${pretestScore !== null ? pretestScore + '%' : '-'}</div>
+        <p class="text-gray-400 text-sm mt-1">Pre-Test</p>
+      </div>
+      <div>
+        <div class="text-3xl font-bold ${posttestScore !== null ? (posttestScore >= 60 ? 'text-emerald-400' : 'text-yellow-400') : 'text-gray-500'}">${posttestScore !== null ? posttestScore + '%' : '-'}</div>
+        <p class="text-gray-400 text-sm mt-1">Post-Test</p>
+      </div>
+    </div>`;
+  
+  if (pretestScore !== null && posttestScore !== null) {
+    const gain = posttestScore - pretestScore;
+    html += `<div class="mt-4 pt-4 border-t border-white/10">
+      <p class="text-sm text-gray-400">Peningkatan: <span class="font-bold ${gain >= 0 ? 'text-emerald-400' : 'text-red-400'}">${gain >= 0 ? '+' : ''}${gain}%</span></p>
+      <p class="text-xs text-gray-500 mt-1">${gain >= 20 ? 'Peningkatan luar biasa! 🎉' : gain >= 10 ? 'Ada kemajuan yang baik! 👍' : gain >= 0 ? 'Tetap konsisten, tingkatkan lagi!' : 'Perlu review materi lebih dalam.'}</p>
+    </div>`;
+  }
+  
+  html += '</div>';
+  container.innerHTML = html;
+}
+
+// NAVIGATION
+function goTo(page) {
+  document.querySelectorAll('.page').forEach(p => p.classList.add('hidden'));
+  document.getElementById('page-' + page).classList.remove('hidden');
+  currentPage = page;
+  
+  if (page === 'materi') showMateri(0);
+  if (page === 'pretest') { answers.pretest = {}; renderQuiz('pretest-container', pretestQuestions, 'pretest'); }
+  if (page === 'posttest') { answers.posttest = {}; renderQuiz('posttest-container', posttestQuestions, 'posttest'); }
+  if (page === 'hasil') renderHasil();
+  
+  window.scrollTo(0, 0);
+  lucide.createIcons();
+}
+
+function showMateri(idx) {
+  document.getElementById('materi-content').innerHTML = materiData[idx].content;
+  for (let i = 0; i < 4; i++) {
+    const tab = document.getElementById('mtab-' + i);
+    tab.className = i === idx ? 'tab-active px-4 py-2 rounded-xl text-sm font-semibold transition-all' : 'px-4 py-2 rounded-xl text-sm font-semibold bg-white/5 hover:bg-white/10 transition-all';
+  }
+}
+
+function startLearning() {
+  studentName = document.getElementById('input-name').value.trim() || 'Siswa';
+  studentClass = document.getElementById('input-class').value.trim() || 'XII';
+  studentDate = document.getElementById('input-date').value || new Date().toISOString().split('T')[0];
+  document.getElementById('menu-name').textContent = studentName;
+  goTo('menu');
+}
+
+// PARTICLES
+function createParticles() {
+  const container = document.getElementById('particles');
+  const colors = ['#10b981', '#06b6d4', '#8b5cf6', '#f59e0b'];
+  for (let i = 0; i < 15; i++) {
+    const p = document.createElement('div');
+    p.className = 'particle';
+    p.style.width = Math.random() * 6 + 3 + 'px';
+    p.style.height = p.style.width;
+    p.style.background = colors[Math.floor(Math.random() * colors.length)];
+    p.style.left = Math.random() * 100 + '%';
+    p.style.top = Math.random() * 100 + '%';
+    p.style.animationDelay = Math.random() * 4 + 's';
+    container.appendChild(p);
+  }
+}
+
+// INIT SDK
+const dataHandler = {
+  onDataChanged(data) {
+    allStudentData = data;
+    console.log('Data updated from sheet:', data);
+  }
+};
+
+async function initializeApp() {
+  const result = await window.dataSdk.init(dataHandler);
+  if (!result.isOk) {
+    console.error('Failed to init data SDK');
+  }
+}
+
+initializeApp();
+
+const defaultConfig = {
+  main_title: 'Pencemaran Lingkungan',
+  school_name: 'SMA Negeri 1',
+  background_color: '#0f172a',
+  surface_color: '#1e293b',
+  text_color: '#f1f5f9',
+  primary_action: '#10b981',
+  secondary_action: '#06b6d4'
+};
+
+window.elementSdk.init({
+  defaultConfig,
+  onConfigChange: async (config) => {
+    document.getElementById('display-title').textContent = config.main_title || defaultConfig.main_title;
+    document.getElementById('display-school').textContent = config.school_name || defaultConfig.school_name;
+    
+    const app = document.getElementById('app');
+    const primary = config.primary_action || defaultConfig.primary_action;
+    const bg = config.background_color || defaultConfig.background_color;
+    const text = config.text_color || defaultConfig.text_color;
+    
+    app.style.color = text;
+    document.querySelectorAll('.nunito').forEach(el => {
+      if (config.font_family) el.style.fontFamily = config.font_family + ', Nunito, sans-serif';
+    });
+    if (config.font_family) document.body.style.fontFamily = config.font_family + ', Poppins, sans-serif';
+    if (config.font_size) {
+      const base = config.font_size;
+      document.body.style.fontSize = base + 'px';
+    }
+  },
+  mapToCapabilities: (config) => ({
+    recolorables: [
+      { get: () => config.background_color || defaultConfig.background_color, set: (v) => { config.background_color = v; window.elementSdk.setConfig({ background_color: v }); } },
+      { get: () => config.surface_color || defaultConfig.surface_color, set: (v) => { config.surface_color = v; window.elementSdk.setConfig({ surface_color: v }); } },
+      { get: () => config.text_color || defaultConfig.text_color, set: (v) => { config.text_color = v; window.elementSdk.setConfig({ text_color: v }); } },
+      { get: () => config.primary_action || defaultConfig.primary_action, set: (v) => { config.primary_action = v; window.elementSdk.setConfig({ primary_action: v }); } },
+      { get: () => config.secondary_action || defaultConfig.secondary_action, set: (v) => { config.secondary_action = v; window.elementSdk.setConfig({ secondary_action: v }); } }
+    ],
+    borderables: [],
+    fontEditable: { get: () => config.font_family || defaultConfig.font_family || 'Poppins', set: (v) => { config.font_family = v; window.elementSdk.setConfig({ font_family: v }); } },
+    fontSizeable: { get: () => config.font_size || 16, set: (v) => { config.font_size = v; window.elementSdk.setConfig({ font_size: v }); } }
+  }),
+  mapToEditPanelValues: (config) => new Map([
+    ['main_title', config.main_title || defaultConfig.main_title],
+    ['school_name', config.school_name || defaultConfig.school_name]
+  ])
+});
+
+createParticles();
+document.getElementById('input-date').value = new Date().toISOString().split('T')[0];
+lucide.createIcons();
+</script>
+ <script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9fe0701bf1766cfa',t:'MTc3OTE2NTc3Ny4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
